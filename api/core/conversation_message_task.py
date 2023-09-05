@@ -212,7 +212,8 @@ class ConversationMessageTask:
         db.session.add(message_agent_thought)
         db.session.flush()
 
-        self._pub_handler.pub_agent_thought(message_agent_thought)
+        if self.streaming:
+            self._pub_handler.pub_agent_thought(message_agent_thought)
 
         return message_agent_thought
 
